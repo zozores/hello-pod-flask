@@ -7,7 +7,7 @@ app = Flask(__name__)
 def hello():
     data = {
         'hostname': socket.gethostname(),
-        'version': '1.0'
+        'version': '2.0'
     }
     return render_template('hello.html', data=data)
 
