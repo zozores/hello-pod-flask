@@ -1,8 +1,11 @@
 <html>
 <head>
-    <title>Hello v{{ data.version }}</title>
+    <title>Hello v{{ data.ver }}</title>
 </head>
 <body>
-<h1>Hello I'm {{ data.hostname }} - v{{ data.version }}</h1>
+<h1>{{ data.greet }} {{ data.hostname }} - v{{ data.ver }}</h1>
+{% if data.hide %}
+<h2>{{ data.hide }}<h2>
+{% endif %}
 </body>
 </html>
