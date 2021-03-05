@@ -5,7 +5,7 @@ import socket
 
 app = Flask(__name__)
 
-FlaskDynaconf(app, settings_files=["settings.toml"], root_path="/app/conf")
+FlaskDynaconf(app, settings_files=["settings.toml"])
 
 settings = app.config
 
