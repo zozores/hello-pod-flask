@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from dynaconf import FlaskDynaconf
+import sys
 import socket
 
 
@@ -13,9 +14,12 @@ settings = app.config
 def hello():
     data = {
         'hostname': socket.gethostname(),
-        'ver': settings.get("ver", ""),
-        'greet': settings.get("greet", ""),
-        'hide': settings.get("hide", "")
+        'ver': settings.get("ver", "4.0"),
+        'greet': settings.get("greet", "Olá"),
+        'secret': settings.get("secret", ""),
+        'primary_color': settings.get("primary_color", "red"),
+        'secondary_color': settings.get("secondary_color", "orange"),
+        'arg': sys.argv[1]
     }
     return render_template('hello.html', data=data)
 
