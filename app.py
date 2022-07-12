@@ -6,22 +6,33 @@ import socket
 
 app = Flask(__name__)
 
-FlaskDynaconf(app, settings_files=['settings.toml', '.secrets.toml'], envvar_prefix="HELLO")
+FlaskDynaconf(
+    app,
+    settings_files=[
+        "settings.toml",
+        ".secrets.toml",
+        "/config/settings.toml",
+        "/config/.secrets.toml",
+    ],
+    envvar_prefix="hello",
+)
 
 settings = app.config
 
-@app.route('/')
+
+@app.route("/")
 def hello():
     data = {
-        'hostname': socket.gethostname(),
-        'ver': settings.get("ver", "4.0"),
-        'greet': settings.get("greet", "Olá"),
-        'secret': settings.get("secret", ""),
-        'primary_color': settings.get("primary_color", "red"),
-        'secondary_color': settings.get("secondary_color", "orange"),
-        'arg': sys.argv[1] if len(sys.argv) > 1 else ""
+        "hostname": socket.gethostname(),
+        "ver": settings.get("ver", "4.0"),
+        "greet": settings.get("greet", "Olá"),
+        "secret": settings.get("secret", ""),
+        "primary_color": settings.get("primary_color", "red"),
+        "secondary_color": settings.get("secondary_color", "orange"),
+        "arg": sys.argv[1] if len(sys.argv) > 1 else "",
     }
-    return render_template('hello.html', data=data)
+    return render_template("hello.html", data=data)
 
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0")
