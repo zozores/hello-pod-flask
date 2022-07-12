@@ -6,7 +6,7 @@ import socket
 
 app = Flask(__name__)
 
-FlaskDynaconf(app, settings_files=["settings.toml"])
+FlaskDynaconf(app, settings_files=['settings.toml', '.secrets.toml'], envvar_prefix="HELLO")
 
 settings = app.config
 
@@ -19,7 +19,7 @@ def hello():
         'secret': settings.get("secret", ""),
         'primary_color': settings.get("primary_color", "red"),
         'secondary_color': settings.get("secondary_color", "orange"),
-        'arg': sys.argv[1]
+        'arg': sys.argv[1] if len(sys.argv) > 1 else ""
     }
     return render_template('hello.html', data=data)
 
